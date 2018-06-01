@@ -1,62 +1,50 @@
+  <div class="container login-container">
+    <div class="col-md-5 col-sm-12">
+      <!-- Card -->
+      <div class="card login-card">
 
-<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <!--Modal: Contact form-->
-    <div class="modal-dialog cascading-modal" role="document">
+       <!-- Card image -->
+       <div class="view overlay">
+         <img class="card-img-top" src="img/login-img.png" alt="Card image cap">
+         <a href="#!">
+           <div class="mask rgba-white-slight"></div>
+         </a>
+       </div>
+       <!-- Card content -->
+       <div class="card-body">
 
-        <!--Content-->
-        <div class="modal-content">
+        <!-- Title -->
+        <h4 class="card-title text-center h3">Track Record System</h4>
+        <!-- Text -->
+        <!-- Material form login -->
+        <form>
+          <p class="h4 text-center mb-4">Sign in</p>
 
-            <!--Header-->
-            <div class="modal-header primary-color white-text">
-                <h4 class="title">
-                    <i class="fa fa-pencil"></i> Contact form</h4>
-                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <!--Body-->
-            <div class="modal-body">
+          <!-- Material input email -->
+          <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="email" id="materialFormLoginEmailEx" class="form-control">
+            <label for="materialFormLoginEmailEx">Your email</label>
+          </div>
 
-                <!-- Material input name -->
-                <div class="md-form form-sm">
-                    <i class="fa fa-envelope prefix"></i>
-                    <input type="text" id="materialFormNameModalEx1" class="form-control form-control-sm">
-                    <label for="materialFormNameModalEx1">Your name</label>
-                </div>
+          <!-- Material input password -->
+          <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password" id="materialFormLoginPasswordEx" class="form-control">
+            <label for="materialFormLoginPasswordEx">Your password</label>
+          </div>
 
-                <!-- Material input email -->
-                <div class="md-form form-sm">
-                    <i class="fa fa-lock prefix"></i>
-                    <input type="password" id="materialFormEmailModalEx1" class="form-control form-control-sm">
-                    <label for="materialFormEmailModalEx1">Your email</label>
-                </div>
+          <div class="text-center mt-4">
+            <button class="btn btn-primary" type="submit">Login</button>
+          </div>
+        </form>
+        <!-- Material form login -->
 
-                <!-- Material input subject -->
-                <div class="md-form form-sm">
-                    <i class="fa fa-tag prefix"></i>
-                    <input type="text" id="materialFormSubjectModalEx1" class="form-control form-control-sm">
-                    <label for="materialFormSubjectModalEx1">Subject</label>
-                </div>
+      </div>
 
-                <!-- Material textarea message -->
-                <div class="md-form form-sm">
-                    <i class="fa fa-pencil prefix"></i>
-                    <textarea type="text" id="materialFormMessageModalEx1" class="md-textarea form-control"></textarea>
-                    <label for="materialFormMessageModalEx1">Your message</label>
-                </div>
-
-                <div class="text-center mt-4 mb-2">
-                    <button class="btn btn-primary">Send
-                        <i class="fa fa-send ml-2"></i>
-                    </button>
-                </div>
-
-            </div>
-        </div>
-        <!--/.Content-->
     </div>
-    <!--/Modal: Contact form-->
-</div>
+    <!-- Card -->
 
-<button></button>
-                      
+
+  </div>
+</div>
