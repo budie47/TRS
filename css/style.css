@@ -14,3 +14,23 @@
 .login-card{
 	margin-top:50px;
 }
+
+.container-fluid{
+	margin-top: 70px;
+}
+
+.bold-text{
+	font-weight: bold;
+}
+
+.text-selected{
+	color: #e65100 !important;
+}
+
+.menu-icon{
+	color: #000;
+}
+
+.modal-body{
+	padding: 10px 40px 10px;
+}
