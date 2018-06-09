@@ -7,7 +7,6 @@
     <title>TRS | Maintain Category</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../lib/font-awesome-4.7.0/css/font-awesome.min.css">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../../lib/MDB/css/bootstrap.min.css" >
     <!-- Material Design Bootstrap -->
@@ -18,63 +17,50 @@
     <link href="../../lib/simple-sidebar.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="../../css/style.css" rel="stylesheet">
-
-
 </head>
 <body>
-
-    <div>
-      <div id="wrapper">
-
+    <div> 
+<div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+<div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="">
-
                     </a>
                 </li>
                 <li>
-                    <a class="bold-text" href="search-record/search-record.php">Search Record</a>
+                    <a class="bold-text" href="../search-record/search-record.php">Search Record</a>
                 </li>
                 <li>
-                    <a class="bold-text" href="maintain-record/maintain-record.php">Maintain Record</a>
+                    <a class="bold-text" href="../maintain-record/maintain-record.php">Record List</a>
                 </li>
                 <li>
-                    <a class="bold-text text-selected" href="#">Maintain Category</a>
+                    <a class="bold-text text-selected" href="#">Category List</a>
                 </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
         <div id="page-content-wrapper">
-
             <?php
             include '../nav/nav.php';
             ?>
-
             <div class="container-fluid">
                 <!-- Card -->
                 <div class="card">
-
-
                   <!-- Card content -->
                   <div class="card-body">
-
                     <!-- Title -->
                     <div>
                       <h3 class="card-title">
-                         Category List
-                         <button type="button" class="btn btn-primary waves-light float-right" data-toggle="modal" data-target="#categoryModal" (click)="catModal.show()" mdbWavesEffect>
-                             <i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
-                         </button>
-
-                     </h3>
-                 </div>
-
-                 <!--Table-->
-                 <table class="table table-striped table-responsive-md btn-table">
+                       Category List
+                       <button type="button" class="btn btn-primary waves-light float-right" data-toggle="modal" data-target="#categoryModal" (click)="catModal.show()" mdbWavesEffect>
+                           <i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
+                       </button>
+                   </h3>
+               </div>
+               <!--Table-->
+               <table class="table table-striped table-responsive-md btn-table">
                   <!--Table head-->
                   <thead>
                     <tr>
@@ -86,7 +72,6 @@
                   </tr>
               </thead>
               <!--Table head-->
-
               <!--Table body-->
               <tbody>
                 <tr>       
@@ -108,11 +93,7 @@
   </table>
   <!--Table-->
   <!-- Button -->
-
-
-
 </div>
-
 </div>
 <!-- Card -->
 
@@ -165,23 +146,13 @@
         </div>
     </div>
 </div>
-
 </div>
 </div>
 <!-- /#page-content-wrapper -->
-
 </div>
 <!-- /#wrapper -->
-
-
-
 </div>
-
 <!-- div main div -->
-
-
-
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
