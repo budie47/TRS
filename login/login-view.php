@@ -21,22 +21,25 @@
           <p class="h4 text-center mb-4">Sign in</p>
 
           <!-- Material input email -->
-          <div class="md-form">
-            <i class="fa fa-envelope prefix grey-text"></i>
-            <input type="email" id="materialFormLoginEmailEx" class="form-control">
-            <label for="materialFormLoginEmailEx">Your email</label>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+            <span class="helper-text" data-error="wrong" data-success="right"></span>
           </div>
 
-          <!-- Material input password -->
-          <div class="md-form">
-            <i class="fa fa-lock prefix grey-text"></i>
-            <input type="password" id="materialFormLoginPasswordEx" class="form-control">
-            <label for="materialFormLoginPasswordEx">Your password</label>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">lock</i>
+            <input id="password" type="password" class="validate">
+            <label for="password">Password</label>
           </div>
 
-          <div class="text-center mt-4">
-            <button class="btn btn-primary" type="submit">Login</button>
+          <div class="text-center input-field col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
           </div>
+
         </form>
         <!-- Material form login -->
 

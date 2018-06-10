@@ -4,17 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>TRS | Maintain Category</title>
+  <title>TRS | Record List</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../lib/font-awesome-4.7.0/css/font-awesome.min.css">
-  <!-- JqueryUI CSS -->
-  <link rel="stylesheet" href="../../lib/jquery-ui-1.12.1/jquery-ui.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../../lib/MDB/css/bootstrap.min.css" >
-  <!-- Material Design Bootstrap -->
-  <link href="../../lib/MDB/css/mdb.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="../../lib/MDB/css/mdb.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../lib/materialize/css/materialize.min.css" >
   <!-- Side Bar CSS -->
   <link href="../../lib/simple-sidebar.css" rel="stylesheet">
   <!-- Your custom styles (optional) -->
@@ -31,13 +28,13 @@
             </a>
           </li>
           <li>
-            <a class="bold-text" href="../search-record/search-record.php">Search Record</a>
+            <a class="bold-text" href="../search-record/search-record.php"><i class="material-icons">search</i>Search Record</a>
           </li>
           <li>
-            <a class="bold-text text-selected" href="#">Record List</a>
+            <a class="bold-text text-selected" href="#"><i class="material-icons">assignment</i> Record List</a>
           </li>
           <li>
-            <a class="bold-text " href="../maintain-category/maintain-category.php">Category List</a>
+            <a class="bold-text " href="../maintain-category/maintain-category.php"><i class="material-icons">description</i> Category List</a>
           </li>
         </ul>
       </div>
@@ -56,9 +53,8 @@
               <div>
                 <h3 class="card-title">
                  Company Project Record
-                 <button type="button" class="btn btn-primary waves-light float-right" data-toggle="modal" data-target="#categoryModal" (click)="catModal.show()" mdbWavesEffect>
-                   <i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
-                 </button>
+                 <!-- Modal Trigger -->
+                 <button data-target="modal1" class="btn modal-trigger float-right">  <i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
                </h3>
              </div>
              <!--Table-->
@@ -120,130 +116,122 @@
         </div>
         <!-- Card -->
 
-
-        <div mdbModal #catModal="mdb-modal" class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <form>
-                <div class="modal-header">
-                  <h4 class="modal-title bold-text" id="myModalLabel">Project Record</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="catModal.hide()">
-                    <span aria-hidden="true">×</span>
-                  </button>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal-form" style=" max-height: 84%;">
+          <div class="modal-content" >
+            <h4>Company Record</h4>
+            <p>Adding or Updating company record details</p>
+            <div class="row form-row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <i class="fa fa-briefcase prefix "></i>
+                    <input id="ProjectTitle" type="text">
+                    <label for="ProjectTitle">Project Title</label>
+                  </div>
                 </div>
-                <div class="modal-body">
-
-                  <!-- Material form contact -->
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <!-- Material textarea message -->
-                      <div class="md-form">
-                        <i class="fa fa-briefcase prefix grey-text"></i>
-                        <textarea type="text" id="materialFormProjectTitle" class="form-control md-textarea" rows="3"></textarea>
-                        <label for="materialFormProjectTitle">Project Title</label>
-                      </div>
-                    </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <i class="fa fa-building prefix "></i>
+                    <input type="text"  id="EndUserAgency">
+                    <label for="EndUserAgency">End User Agency</label>
                   </div>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-building prefix grey-text"></i>
-                        <input type="text" id="materialFormEndUserAgency" class="form-control">
-                        <label for="materialFormEndUserAgency">End User Agency</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-usd prefix grey-text"></i>
-                        <input type="text" id="materialFormAmount" class="form-control">
-                        <label for="materialFormAmount">Amount</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-calendar-o prefix grey-text"></i>
-                        <input type="text" id="materialFormYear" class="form-control">
-                        <label for="materialFormYear">Year</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-calendar-plus-o prefix grey-text"></i>
-                        <input type="text" id="materialFormStartPeriod" class="form-control">
-                        <label for="materialFormStartPeriod">Start Period</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-calendar-minus-o prefix grey-text"></i>
-                        <input type="text" id="materialFormEndPeriod" class="form-control">
-                        <label for="materialFormEndPeriod">End Period</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-user prefix grey-text"></i>
-                        <input type="text" id="materialFormEndUserContactPerson" class="form-control">
-                        <label for="materialFormEndUserContactPerson">End User Contact Person</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <!-- Material input text -->
-                      <div class="md-form">
-                        <i class="fa fa-thumb-tack prefix grey-text"></i>
-                        <input type="text" id="materialFormCategory" class="form-control">
-                        <label for="materialFormCategory">Category</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Material form contact -->
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="catModal.hide()" mdbWavesEffect>Close</button>
-                  <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect>Save changes</button>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="fa fa-usd prefix"></i>
+                    <input type="text" id="ProjectAmount">
+                    <label for="ProjectAmount">Project Amount</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <i class="fa fa-calendar-o prefix"></i>
+                    <select>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="2015">2015</option>
+                      <option value="2016">2016</option>
+                      <option value="2017">2017</option>
+                    </select>
+                    <label>Project Year</label>
+                   <!--  <label for="ProjectYear">Project Year</label> -->
+                  </div>
                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="fa fa-calendar-plus-o prefix"></i>
+                    <input type="text" id="StartPeriod" class="datepicker">
+                    <label for="StartPeriod">Start Period</label>
+                  </div>
+                  <div class="input-field col s6">
+                    <i class="fa fa-calendar-minus-o prefix"></i>
+                    <input type="text" id="EndPeriod" class="datepicker">
+                    <label for="EndPeriod">End Period</label>
+                  </div>
+                </div>
+                <div class="row">
+                 <div class="input-field col s6">
+                   <i class="fa fa-user prefix"></i>
+                   <input type="text" id="EndUserPersonContact" >
+                   <label for="EndUserPersonContact">End User Person Contact Name</label>
+                 </div>
+                 <div class="input-field col s6">
+                   <i class="fa fa-phone prefix"></i>
+                   <input type="text" id="EndUserPersonContactNo" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$
+">
+                   <label for="EndUserPersonContactNo">End User Person Contact Phone No</label>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                    <i class="fa fa-thumb-tack prefix"></i>
+                     <select multiple>
+                       <option value="" disabled selected>Choose your option</option>
+                       <option value="1">Membekal</option>
+                       <option value="2">Memasang</option>
+                       <option value="3">Menguji</option>
+                     </select>
+                     <label>Project Category</label>
+                     <!-- <label for="ProjectCategory">Project Category</label> -->
+                 </div>
+               </div>
+             </form>
+           </div>
+         </div>
+         <div class="modal-footer">
+           <div>
+             <a href="#!" class=" modal-close btn waves-effect waves-light">Cancel
+               <i class="material-icons right">cancel</i>
+             </a>
+           </div>
+           <div>
+             <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+               <i class="material-icons right">send</i>
+             </button>
+           </div>
+         </div>
+       </div>
     </div>
-    <!-- /#page-content-wrapper -->
   </div>
-  <!-- /#wrapper -->
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
 </div>
 <!-- div main div -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="../../lib/MDB/js/jquery-3.2.1.min.js"></script>
-<script src="../../lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-
 <script src="../../lib/MDB/js/popper.min.js"></script>
 <script src="../../lib/MDB/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../lib/MDB/js/mdb.min.js"></script>
-<script src="../../lib/moment/moment.min.js"></script>
+<!-- <script type="text/javascript" src="../../lib/MDB/js/mdb.min.js"></script> -->
+<script src="../../lib/materialize/js/materialize.min.js"></script>
 <script type="text/javascript" src="../../js/trs.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    $('.modal').modal();
+    $('select').formSelect();
+    $('.datepicker').datepicker();
 
+  });
 </script>
 </body>
 </html>

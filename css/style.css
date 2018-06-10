@@ -4,7 +4,7 @@
     width: 100%;
     color: #333333;
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 0 0;
     align-items: center;
     justify-content: space-around;
     display: flex;
@@ -12,11 +12,11 @@
 }
 
 .login-card{
-	margin-top:50px;
+	margin-top:10px;
 }
 
 .container-fluid{
-	margin-top: 70px;
+	margin-top: 30px;
 }
 
 .bold-text{
@@ -35,5 +35,67 @@
 	padding: 10px 40px 10px;
 }
 
-/*datepicker*/
+.brand-logo:hover{
+text-decoration: none;
+}
+#menu-toggle{
+    margin-left: 10px;
+}
+
+nav{
+    background-color: #e65100;
+}
+
+#page-content-wrapper{
+    padding: 0px;
+}
+
+span.badge{
+    color: white;
+}
+
+.form-row{
+    padding: 0px;
+    margin:0px;
+}
+
+.modal-form{
+   
+    top: 2% !important;
+}
+
+.datepicker-modal{
+    max-height: 55%;
+}
+.datepicker-modal>.modal-content{
+    border: none;
+}
+.input-field{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.search-row{
+    margin-left: 30% !important;
+}
+
+.table-head {
+    margin-bottom: 15px;
+}
+
+.table-head>.card-title{
+    display: inline !important;
+}
+
+.table-head>.btn{
+    margin-left: 10px;
+}
+
+.record-list-modal{
+    top: 0% !important;
+    margin: 1%;
+    width: 98%;
+    height: fit-content;
+    max-height: 97%;
+}
 
