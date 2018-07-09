@@ -99,3 +99,12 @@ span.badge{
     max-height: 97%;
 }
 
+.dashboard-card{
+    padding: 10px !important;
+    text-align: center;
+}
+
+.dashboard-card>.card-stats-number{
+    padding: 0px;
+    margin: 0px;
+}
