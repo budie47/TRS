@@ -118,3 +118,8 @@ span.badge{
     max-height: 335px;
     overflow: auto;
 }
+
+.card-tabs{
+    max-height: 510px;
+    overflow: auto;
+}

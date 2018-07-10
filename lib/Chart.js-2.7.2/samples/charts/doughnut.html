@@ -27,39 +27,49 @@
 		var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
+		function randomCalor(){
+			return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+		}
 
 		var config = {
 			type: 'doughnut',
 			data: {
 				datasets: [{
 					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
+						2,
+						1,
+						2,
+						1,
+						1,
+						1,
+						1
 					],
 					backgroundColor: [
-						window.chartColors.red,
-						window.chartColors.orange,
-						window.chartColors.yellow,
-						window.chartColors.green,
-						window.chartColors.blue,
+						randomCalor(),
+						randomCalor(),
+						randomCalor(),
+						randomCalor(),
+						randomCalor(),
+						randomCalor(),
+						randomCalor()
 					],
+					
 					label: 'Dataset 1'
 				}],
 				labels: [
-					'Red',
-					'Orange',
-					'Yellow',
-					'Green',
-					'Blue'
+					"Jabatan Perkhidmatan Awam - JPA",
+					"Construction Industry Development Board Malaysia (CIDB)",
+					"International Islamic University Malaysia (IIUM)",
+					"Institut Tadbiran Awam Negara (INTAN)",
+					"Majlis Bandaraya Melaka Bersejarah (MBMB)",
+					"Majlis Bandaraya Melaka Bersejarah (MBMB)",
+					"dasda"
 				]
 			},
 			options: {
 				responsive: true,
 				legend: {
-					position: 'top',
+					display:false,
 				},
 				title: {
 					display: true,
