@@ -1,3 +1,8 @@
+<?php
+include "../../dbconn.php";
+$conn = dbcon();
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,16 +33,16 @@
             </a>
           </li>
           <li>
-            <a class="bold-text text-selected" href="#">Search Record</a>
+            <a class="bold-text text-selected" href="#"><i class="material-icons">search</i> Search Record</a>
           </li>
           <li>
-            <a class="bold-text " href="../maintain-record/">Record List</a>
+            <a class="bold-text " href="../maintain-record/"> <i class="material-icons">assignment</i>Record List</a>
           </li>
           <li>
             <a class="bold-text " href="../client/"><i class="material-icons prefix">account_box</i> Client</a>
           </li>
           <li>
-            <a class="bold-text " href="../maintain-category/">Category List</a>
+            <a class="bold-text " href="../maintain-category/"><i class="material-icons">description</i> Category List</a>
           </li>
         </ul>
       </div>
@@ -75,7 +80,44 @@
                         </div>
                       </form>
                     </div>
-                    <div id="test-swipe-2" class="col s12 "></div>
+                    <div id="test-swipe-2" class="col s12 ">
+                      <br>
+                      <span class="card-title text-center">List Record By Category</span>
+                        <form class="col s12">
+                          <div class="row search-row">
+                            <div class="input-field col s10 ">
+                             <i class="material-icons prefix ">search</i>
+                             
+                               <select id="search_category_select">
+                                 <option value="" disabled selected>Choose your option</option>
+                                 <?php
+                                 if($conn){
+                                   $queryEU = "SELECT record_category_id, name FROM `trs_record_category`";
+                                   $resultEU = $conn->query($queryEU);
+                                   if($resultEU->num_rows >0){
+                                     while ($row = $resultEU->fetch_assoc()) {
+                                       $rcid = $row["record_category_id"];
+                                       $name = $row["name"];
+                                       ?>
+                                       <option value=<?php echo $rcid; ?>><?php echo $name; ?></option>
+                                       <?php
+                                     }
+                                   }
+                                 }
+                                 ?>
+                                
+                               </select>
+                               <label>Select Category</label>
+                             
+                           </div>
+                           <div class="input-field col s2" >
+                            <button class="btn waves-effect waves-light" id="btn-list-category">Submit
+                              <i class="material-icons right">send</i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
                     
                   </div>
                   
@@ -87,7 +129,7 @@
                   <h3 class="card-title">
                    Search Result
                  </h3>
-                 <button class="btn waves-effect waves-light float-right  modal-trigger" data-target="ShowRecordList" id="show_list_btn">Show List
+                 <button class="btn waves-effect waves-light float-right "  id="show_list_btn">Show List
                    <i class="material-icons right">featured_play_list</i>
                  </button>
                  <button class="btn waves-effect waves-light float-right" id="add_to_print_btn">Add to print
@@ -120,19 +162,18 @@
           </h3>
         </div>
         <div class="input-field col s6">
-          <input value="SENARAI PENGALAMAN SYARIKAT" id="first_name2" type="text">
+          <input value="SENARAI PENGALAMAN SYARIKAT" id="doc_title_print" type="text">
           <label class="active" for="first_name2">Document Title</label>
+          <button class="btn waves-effect waves-light float-right" id="change_title_doc">Change
+            <i class="material-icons right">print</i>
+          </button>
         </div>
         <div class="input-field col s3">
-          <button class="btn waves-effect waves-light float-right" >Print
+          <button class="btn waves-effect waves-light float-right" id="print_record_list_btn">Print
             <i class="material-icons right">print</i>
           </button>
         </div>
       </div>
-     
-
-      
-
     </div>
     <div>
      <!--Table-->
@@ -169,8 +210,38 @@
   })
 
   $(document).ready(function(){
+    $('select').formSelect();
     var wtp_record = [];  
     $('.tabs').tabs();
+
+    var onModalClose = function() {
+       $(".btn-bulat").css("display","inline-block");
+    };
+
+     var modal = document.querySelector('.modal');
+
+    var showListInstance = M.Modal.init(modal,{
+      onCloseEnd: onModalClose 
+    });
+
+    $("#btn-list-category").click(function(e){
+      e.preventDefault();
+      var category = $("#search_category_select").val()+"-|-";
+      var data = {
+        category:category
+      }
+
+      $.ajax({
+        url:'result-search-category.php',
+        type:'POST',
+        data:data,
+        success:function(c){
+          $("#result-table").html(c);
+        }
+      })
+
+
+    })
 
     $("#btn-search-keyword").click(function(e){
       e.preventDefault();
@@ -212,7 +283,7 @@
     })
 
     $("#show_list_btn").click(function(e){
-      console.log(wtp_record);
+      showListInstance.open();
 
       var jsonString = JSON.stringify(wtp_record);
       $.ajax({
@@ -220,15 +291,46 @@
         url:'show-list.php',
         data:{data:jsonString},
         success:function(c){
-          console.log(c);
-
+          //console.log(c);
           $("#divShow_list").html(c);
         }
-      })
+      });
 
+    });
+
+    $("#print_record_list_btn").click(function(e){
+
+      $(".btn-bulat").css("display","none");
+      printDiv();
+
+      location.reload();
+
+    });
+
+    $("#change_title_doc").click(function(e){
+      e.preventDefault();
+      $("#title_doc").text($("#doc_title_print").val());
 
     })
+
   })
+
+  function printDiv() 
+{
+
+  var divToPrint=document.getElementById('divShow_list');
+
+  var newWin=window.open('','Print-Window');
+
+  newWin.document.open();
+
+  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+  newWin.document.close();
+
+  setTimeout(function(){newWin.close();},10);
+
+}
 
 </script>
 

@@ -3,6 +3,8 @@ include "../../dbconn.php";
 $conn = dbcon();
 $data = json_decode(stripslashes($_POST['data']));
 
+
+
 ?>	
 
 
@@ -27,7 +29,9 @@ $data = json_decode(stripslashes($_POST['data']));
 </head>
 <body>
 
-     <table class="table table-striped table-responsive-md btn-table">
+	<h5 align="center" id="title_doc">SENARAI NAMA SYARIKAT</h5>
+
+     <table class="table table-striped table-responsive-md btn-table" id="show_list_table">
       <!--Table head-->
       <thead>
         <tr>
@@ -40,16 +44,16 @@ $data = json_decode(stripslashes($_POST['data']));
           <th>Start Date</th>
           <th>End Date</th>
           <th>Time Period</th>
-          <th>Delete</th>
+          <th id="btnDeleteRowHead"></th>
         </tr>
       </thead><!--Table head-->
       <tbody><!--Table body-->
       	<?php
 
+      	$counter = 1;
+
       	foreach ($data as $d) {
       		# code...
-      		$counter = 0;
-
 
       		if($conn){
       			$queryGetRecord = "SELECT tr.track_record_id, tr.project_title, tr.year, tr.amount, tr.status, tr.lo_po_sst_no, tr.start_period, tr.end_period, tr.time_period, tr.end_user, eu.agency, tr.record_category_id FROM trs_track_record tr  INNER JOIN trs_end_user eu ON tr.end_user = eu.end_user_id  WHERE tr.track_record_id=".$d;
@@ -81,8 +85,8 @@ $data = json_decode(stripslashes($_POST['data']));
 			              <td><?php echo $start_period;?></td>
 			              <td><?php echo $end_period;?></td>
 			              <td><?php echo $time_period;?> Month</td>
-      					  <td>
-      					    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0 btn-bulat">
+      					  <td id="btnDeleteRowBody">
+      					    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0 btn-bulat" id="btn_delete_record_list">
       					      <i class="fa fa-trash" aria-hidden="true"></i>
       					    </button>
       					  </td>
@@ -126,22 +130,10 @@ $data = json_decode(stripslashes($_POST['data']));
   })
 
   $(document).ready(function(){
-    
-
-    $("input[type='checkbox']").on('change',function(){
-      var record_checked_id = this.value;
-      if($('#cb_id_'+this.value+':checked').val() === undefined){
-        selected_record.splice(selected_record.indexOf(this.value),1);
-      }else{
-        selected_record.push(this.value);
-      }
-      console.log(selected_record);
-    });
-
-    $("#cb_select_all").click(function(){
-
-      $( "input[type='checkbox']" ).trigger( "change" );
-
+    $("#show_list_table").on('click','#btn_delete_record_list',function(e){
+    	e.preventDefault();
+    	var _tr = $(this).closest('tr');
+    	_tr.remove();
     })
 
 

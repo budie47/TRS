@@ -14,6 +14,9 @@ $conn = dbcon();
   <link rel="stylesheet" href="../../lib/font-awesome-4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../../lib/datatables/datatables.css" >
+
+    <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="../../lib/MDB/css/bootstrap.min.css" >
 
   <link rel="stylesheet" href="../../lib/materialize/css/materialize.min.css" >
@@ -130,7 +133,7 @@ $conn = dbcon();
             <!--Table-->
             <!-- Button -->
           </div>
-        </div>
+        </div> 
         <!-- Card -->
 
         <!-- Modal Structure -->
@@ -201,20 +204,34 @@ $conn = dbcon();
 <script src="../../lib/MDB/js/jquery-3.2.1.min.js"></script>
 <script src="../../lib/MDB/js/popper.min.js"></script>
 <script src="../../lib/MDB/js/bootstrap.min.js"></script>
+<script src="../../lib/datatables/datatables.js"></script>
 <!-- <script type="text/javascript" src="../../lib/MDB/js/mdb.min.js"></script> -->
 <script src="../../lib/materialize/js/materialize.min.js"></script>
 <script type="text/javascript" src="../../js/trs.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 
+   $('#table_client').DataTable();
+
   var onModalClose = function() { };
 
-  var onModalOpenStart = function(){  };
+  var onModalOpenStart = function(){
+
+    $.get( "getID.php", function( data ) {
+      var id = parseInt(data) + 1;
+      $("#clientID").val(id);
+      M.updateTextFields();
+    });
+
+    };
 
   var modal = document.querySelector('.modal');
   var M_instance = M.Modal.init(modal,{
     onCloseEnd: onModalClose, 
     onOpenStart:onModalOpenStart
+  });
+
+  var Update_instance = M.Modal.init(modal,{
   });
 
   $("#btn_add_new_client").click(function(e){

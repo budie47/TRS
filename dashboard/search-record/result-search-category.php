@@ -1,7 +1,7 @@
 <?php
 include "../../dbconn.php";
 $conn = dbcon();
-$keyword = $_POST['key'];
+$keyword = $_POST['category'];
 ?>
 
 <!doctype html>
@@ -54,7 +54,7 @@ $keyword = $_POST['key'];
     <tbody>
       <?php
       if($conn){
-        $queryGetResult = "SELECT tr.track_record_id, tr.project_title, tr.year, tr.amount, tr.status, tr.lo_po_sst_no, tr.start_period, tr.end_period, tr.time_period, tr.end_user, eu.agency, tr.record_category_id FROM trs_track_record tr  INNER JOIN trs_end_user eu ON tr.end_user = eu.end_user_id  WHERE tr.project_title LIKE '%".$keyword."%'";
+        $queryGetResult = "SELECT tr.track_record_id, tr.project_title, tr.year, tr.amount, tr.status, tr.lo_po_sst_no, tr.start_period, tr.end_period, tr.time_period, tr.end_user, eu.agency, tr.record_category_id FROM trs_track_record tr  INNER JOIN trs_end_user eu ON tr.end_user = eu.end_user_id  WHERE tr.record_category_id LIKE '%".$keyword."%'";
         $resultGR = $conn->query($queryGetResult);
         if($resultGR->num_rows > 0 ){
           while($row = $resultGR->fetch_assoc()){
