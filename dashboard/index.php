@@ -1,3 +1,8 @@
+<?php
+include "../dbconn.php";
+$conn = dbcon();
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -126,39 +131,73 @@
                 </div>
                 <div class="row">
                     <div class="col s6">
-                        <div class="card">
-                          <div class="card-tabs">
-                            <ul class="tabs tabs-fixed-width" id="tabs-swipe-demo">
-                              <li class="tab"><a href="#month">Month</a></li>
-                              <li class="tab"><a class="active" href="#year">Year</a></li>
-                          </ul>
-                      </div>
+                        <div class="card dashboard-top-card">
+                                <div class="card-tabs">
+                                  <ul class="tabs tabs-fixed-width" id="tabs-swipe-demo">
+                                    <li class="tab"><a class="active" href="#revenue">Revenue each year</a></li>
+                                    
+                                </ul>
+                            </div>
+                          
                       <div class="card-content grey lighten-4">
-                        <div id="month">
-                            Month
+                       <div id="revenue"> 
+                            <canvas id="myChart" width="400" height="200"></canvas>
                         </div>
-                        <div id="year">
-                            Year
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             <div class="col s6">
 
-                <div class="card">
+                <div class="card dashboard-top-card">
                   <div class="card-tabs">
                     <ul class="tabs tabs-fixed-width" id="tabs-swipe-demo">
-                      <li class="tab"><a href="#month">Month</a></li>
-                      <li class="tab"><a class="active" href="#year">Year</a></li>
+                      <li class="tab"><a class="active" href="#ogp">On Going Project</a></li>
+                    
                   </ul>
               </div>
               <div class="card-content grey lighten-4">
-                <div id="month">
-                    Month
+                <div id="ogp" class="card-tabs-container">
+                    <table class="highlight">
+                      <thead>
+                        <tr>
+                            <th width="50%">Project Title</th>
+                            <th width="30%">Agency</th>
+                            <th width="20%">End Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+
+                        if($conn){
+                            $ogpQuery = "SELECT tr.project_title, teu.agency, tr.end_period, status FROM trs_track_record tr INNER JOIN trs_end_user teu ON tr.end_user = teu.end_user_id WHERE tr.status = 'On Going'";
+                            $resultOGPQ = $conn->query($ogpQuery);
+                            if($resultOGPQ->num_rows > 0){
+                                while ($rowOGP = $resultOGPQ->fetch_assoc()) {
+                                    # code...
+                                    $agency = $rowOGP['agency'];
+                                    $project_title = $rowOGP['project_title'];
+                                    $end_period = $rowOGP['end_period'];
+                                    $status = $rowOGP['status'];
+
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $project_title;?></td>
+                                      <td><?php echo $agency;?></td>
+                                      <td><?php echo $end_period;?></td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                        }
+
+
+                        ?>
+
+                      </tbody>
+                    </table>
                 </div>
-                <div id="year">
-                    Year
-                </div>
+
             </div>
         </div>
 
@@ -169,15 +208,15 @@
         <div class="card">
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width" id="tabs-swipe-demo">
-              <li class="tab"><a href="#month">Month</a></li>
-              <li class="tab"><a class="active" href="#year">Year</a></li>
+              <li class="tab"><a class="active" href="#pcgraph">Project Category Graph</a></li>
+              <li class="tab"><a  href="#pctable">Project Category Table</a></li>
           </ul>
       </div>
       <div class="card-content grey lighten-4">
-        <div id="month">
+        <div id="pcgraph">
             Month
         </div>
-        <div id="year">
+        <div id="pctable">
             Year
         </div>
     </div>
@@ -188,16 +227,51 @@
     <div class="card">
       <div class="card-tabs">
         <ul class="tabs tabs-fixed-width" id="tabs-swipe-demo">
-          <li class="tab"><a href="#month">Month</a></li>
-          <li class="tab"><a class="active" href="#year">Year</a></li>
+          <li class="tab"><a class="active" href="#cgraph">Client Graph</a></li>
+          <li class="tab"><a href="#ctable">Client Table</a></li>
       </ul>
   </div>
   <div class="card-content grey lighten-4">
-    <div id="month">
+    <div id="cgraph" class="card-tabs-container">
         Month
     </div>
-    <div id="year">
-        Year
+    <div id="ctable" class="card-tabs-container">
+        <table class="highlight">
+          <thead>
+            <tr>
+                <th width="80%">End User</th>
+                <th width="20%">Number of Project</th>
+                
+            </tr>
+          </thead> 
+          <tbody>
+            <?php
+
+            if($conn){
+                $ogpQuery = "SELECT  teu.agency, COUNT(tr.track_record_id) AS total FROM trs_track_record tr INNER JOIN trs_end_user teu ON tr.end_user = teu.end_user_id GROUP BY tr.end_user";
+                $resultOGPQ = $conn->query($ogpQuery);
+                if($resultOGPQ->num_rows > 0){
+                    while ($rowOGP = $resultOGPQ->fetch_assoc()) {
+                        # code...
+                        $agency = $rowOGP['agency'];
+                        $total = $rowOGP['total'];
+                       
+                        ?>
+                        <tr>
+                          <td><?php echo $agency;?></td>
+                          <td><?php echo $total;?></td>
+                          
+                        </tr>
+                        <?php
+                    }
+                }
+            }
+
+
+            ?>
+
+          </tbody>
+        </table>
     </div>
 </div>
 </div>
@@ -224,7 +298,81 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('.tabs').tabs();
+
+    $.get( "getRevenueData.php", function( data ) {
+        console.log(data);
+        var year = [];
+        var amount = [];
+
+        for(var i in data){
+            year.push(data[i].year);
+            amount.push(parseInt(data[i].total));
+        }
+
+        var revenueConfig = configRevenueChart(year.reverse(),amount.reverse());
+        var totalAmountYear = document.getElementById("myChart");
+        var myLineChart = new Chart(totalAmountYear, revenueConfig);
+
+
+    });
 });
+
+
+function configRevenueChart(year,amount){
+
+    var amountConfig = {
+      type: 'line',
+      data: {
+          labels: year,
+          datasets: [{
+              label: 'Project Amount',
+              backgroundColor: 'rgb(63, 127, 191)',
+              borderColor: 'rgb(63, 127, 191)',
+              data: amount,
+              fill: false,
+          }]
+      },
+      options: {
+          responsive: true,
+          title: {
+              display: true,
+              text: 'Project Revenue Each Year'
+          },
+          tooltips: {
+              mode: 'index',
+              intersect: false,
+          },
+          hover: {
+              mode: 'nearest',
+              intersect: true
+          },
+          scales: {
+              xAxes: [{
+                  display: true,
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Year'
+                  }
+              }],
+              yAxes: [{
+                  display: true,
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Value Amount (RM)'
+                  }
+              }]
+          }
+      }
+    };
+    return amountConfig;
+}
+
+
+
+
+
+
+
 </script>
 </body>
 </html>

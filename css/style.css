@@ -108,3 +108,13 @@ span.badge{
     padding: 0px;
     margin: 0px;
 }
+
+.dashboard-top-card {
+    max-height: 450px;
+
+}
+
+.card-tabs-container{
+    max-height: 335px;
+    overflow: auto;
+}
