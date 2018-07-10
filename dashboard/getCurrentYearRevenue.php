@@ -2,6 +2,11 @@
 
 include "../dbconn.php";
 $conn = dbcon();
+session_start();
+
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
 
 if($conn){
 	$query = "SELECT SUM(amount) AS total FROM `trs_track_record` WHERE year = YEAR(NOW()) AND status = 'Complete'";

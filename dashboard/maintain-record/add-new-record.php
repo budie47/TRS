@@ -1,8 +1,12 @@
 <?php
 
 include '../../dbconn.php';
+session_start();
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
 
-$user_id = 1;
+$user_id = $_SESSION['userID'];;
 
 $ProjectID = $_POST["ProjectID"];
 $ProjectTitle = $_POST["ProjectTitle"];

@@ -2,6 +2,11 @@
 
 include "../dbconn.php";
 $conn = dbcon();
+session_start();
+
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
 
 if($conn){
     $pctQuery = "SELECT record_category_id, name FROM trs_record_category";
@@ -16,7 +21,7 @@ if($conn){
             $object = new stdClass();
             $object->name = $name;
 
-            $gptQuery = "SELECT COUNT(track_record_id) AS total FROM trs_track_record WHERE record_category_id LIKE '".$id."%'";
+            $gptQuery = "SELECT COUNT(track_record_id) AS total FROM trs_track_record WHERE record_category_id LIKE '%".$id."-|-%'";
             $resultGPTQ = $conn->query($gptQuery);
             while ($rowGPT = $resultGPTQ->fetch_assoc()) {
               # code...

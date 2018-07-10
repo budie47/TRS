@@ -1,7 +1,7 @@
   <div class="container login-container">
     <div class="col-md-5 col-sm-12">
       <!-- Card -->
-      <div class="card login-card">
+      <div class="card login-card"> 
 
        <!-- Card image -->
        <div class="view overlay">

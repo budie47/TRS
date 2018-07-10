@@ -3,8 +3,6 @@ include "../../dbconn.php";
 $conn = dbcon();
 $data = json_decode(stripslashes($_POST['data']));
 
-
-
 ?>	
 
 

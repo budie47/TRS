@@ -2,7 +2,12 @@
 
 include '../../dbconn.php';
 
-$user_id = 1;
+session_start();
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
+
+$user_id = $_SESSION['userID'];
 
 $clientID = $_POST["clientID"];
 $agencyName = $_POST["agencyName"];

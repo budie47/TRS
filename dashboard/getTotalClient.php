@@ -2,6 +2,11 @@
 
 include "../dbconn.php";
 $conn = dbcon();
+session_start();
+
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
 
 if($conn){
 	$query = "SELECT COUNT(end_user_id) AS total FROM `trs_end_user`";

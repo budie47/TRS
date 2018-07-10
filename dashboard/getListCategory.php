@@ -2,6 +2,11 @@
 
 include "../dbconn.php";
 $conn = dbcon();
+session_start();
+
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
 
 if($conn){
 	$query = "SELECT record_category_id, name FROM trs_record_category";

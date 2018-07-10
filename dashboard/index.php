@@ -2,6 +2,12 @@
 include "../dbconn.php";
 $conn = dbcon();
 
+session_start();
+
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -239,16 +245,17 @@ $conn = dbcon();
                             $name = $rowPCT['name'];
                             $total = 0;
 
-                            $gptQuery = "SELECT COUNT(track_record_id) AS total FROM trs_track_record WHERE record_category_id LIKE '".$id."%'";
+                            $gptQuery = "SELECT COUNT(track_record_id) AS total FROM trs_track_record WHERE record_category_id LIKE '%".$id."-|-%'";
                             $resultGPTQ = $conn->query($gptQuery);
                             while ($rowGPT = $resultGPTQ->fetch_assoc()) {
                               # code...
                               $total = $rowGPT['total'];
+                              //echo $gptQuery;
                             }
                             ?>
                             <tr>
                               <td><?php echo $name;?></td>
-                              <td><?php echo $total;?></td>
+                              <td><?php echo $total; ?></td>
                               
                             </tr>
                             <?php

@@ -1,6 +1,10 @@
 <?php
 include "../../dbconn.php";
 $conn = dbcon();
+session_start();
+if(!isset($_SESSION['token'])){
+  header('Location: http://localhost/trs/TRS');
+}
 
 ?>
 <!doctype html>
@@ -257,7 +261,13 @@ INNER JOIN trs_end_user eu ON tr.end_user = eu.end_user_id";
                   </div>
                   <div class="input-field col s6">
                     <i class="fa fa-calendar-minus-o prefix"></i>
-                    <input type="text" id="ProjectStatus">
+                    <select id="ProjectStatus">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="Complete">Complete</option>
+                        <option value="On Going">On Going</option>
+                      </select>
+<!--                       <label>Materialize Select</label>
+                    <input type="text" > -->
                     <label for="ProjectStatus">Project Status</label>
                   </div>
                 </div>
@@ -420,6 +430,34 @@ INNER JOIN trs_end_user eu ON tr.end_user = eu.end_user_id";
         }
       }) 
     });
+
+    $("#table-record").on('click','#btn_delete_record',function(e){
+      var _record_id = $(this).closest('tr').find('#record_id').text();
+      var r = confirm("Want to delete this record");
+      if (r == true) {
+
+        $.ajax({
+          url:'delete-record.php',
+          type:'POST',
+          data:{
+            projectID:_record_id
+          },
+          success:function(c){
+            if (c.trim() === "|-SUCCESS-|") {
+              //alert("New track record added");
+              //$('#trackForm')[0].reset();
+              $('#modal1').modal('close');
+              location.reload();
+            }else{
+              console.log(c);
+            }
+          }
+        })
+          
+      } else {
+          
+      }
+    })
 
     $("#table-record").on('click','#btn_edit_record',function(e){
       var _record_id = $(this).closest('tr').find('#record_id').text();
